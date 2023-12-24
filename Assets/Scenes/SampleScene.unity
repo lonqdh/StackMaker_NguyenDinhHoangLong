@@ -1579,9 +1579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 1296842501636912328, guid: 1e02103649ae3b84eb1d471023ce946e, type: 3}
-  - {fileID: 1296842501636912328, guid: 7448f2b50c5820c43a13eb0c1ef60557, type: 3}
-  - {fileID: 1296842501636912328, guid: 6a8531affce4a304bb1708286e5b22cf, type: 3}
-  - {fileID: 1296842501636912328, guid: 5a9abc1c9cb90b44d94baf59f567ed9f, type: 3}
+  - {fileID: 1296842501636912328, guid: a7c348d14ab4b084da5cdcfa50042c4c, type: 3}
+  - {fileID: 1296842501636912328, guid: f67a613de1724e041a6a9eb253f01e25, type: 3}
   player: {fileID: 1978307524}
 --- !u!1 &1793225208
 GameObject:

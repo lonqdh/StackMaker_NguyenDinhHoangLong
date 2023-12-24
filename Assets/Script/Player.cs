@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
                 brickList[brickList.Count - 1].GetComponent<Collider>().isTrigger = false;
                 brickList[brickList.Count - 1].gameObject.layer = 0; //phai co neu khong thi brick dc distribute van co layer la brickLayer nen player se lai nhat
                 brickList[brickList.Count - 1].transform.parent = null;
-                //brickList[brickList.Count - 1].transform.SetParent(null);
+                //brickList[brickList.Count -  1].transform.SetParent(null);
                 brickList[brickList.Count - 1].transform.position = hit.transform.position;
 
                 brickList.RemoveAt(brickList.Count - 1); //remove the last item that was added into the list ( if the list total items is above 0 else the system will throw IndexOutOfRangeException
