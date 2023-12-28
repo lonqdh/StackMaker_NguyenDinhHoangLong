@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public List<Brick> brickList = new List<Brick>();
+    private List<Brick> brickList = new List<Brick>();
     //[SerializeField] Brick spawnPoint;
     [SerializeField] private float speed = 5f;
     [SerializeField] private LayerMask wallLayer;
@@ -52,6 +52,15 @@ public class Player : MonoBehaviour
     public void OnInit()
     {
         isMoving = false;
+
+        if (brickList.Count > 0)
+        {
+            foreach (Brick brick in brickList)
+            {
+                Destroy(brick.gameObject);
+            }
+            brickList.Clear();
+        }
     }
 
     private void CheckSwipe()
@@ -143,13 +152,13 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector2.down, out hit, 5f, brickLayer))
         {
             brick = hit.collider.gameObject.GetComponent<Brick>();
-            
+
             if (brickList.Count == 0)
             {
                 currentColor = (int)brick.color;
             }
 
-            if(currentColor == (int)brick.color)
+            if (currentColor == (int)brick.color)
             {
                 brick.GetComponent<Collider>().enabled = true;
                 Vector3 stackPosition = new Vector3(transform.position.x, transform.position.y + 1f + brickList.Count * 0.36f, transform.position.z);
@@ -163,7 +172,7 @@ public class Player : MonoBehaviour
     private void DistributeBricks()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position /*+ new Vector3(0f, 0f, 0.25f)*/, Vector3.down, out hit, 5f, unbrickLayer))
+        if (Physics.Raycast(transform.position + new Vector3(0f, 0f, 0.25f), Vector3.down, out hit, 5f, unbrickLayer))
         {
             //brick = hit.collider.gameObject.GetComponent<Brick>();
             if (brickList.Count > 0)
