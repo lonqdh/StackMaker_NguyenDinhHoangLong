@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask unbrickLayer;
     private Rigidbody rb;
 
+    public Vector2 swipeP;
+    public Vector2 startP;
+    public Vector2 endP;
+
 
     //Swipe and Movement
     private Vector2 startMousePosition, endMousePosition;
@@ -68,18 +72,22 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             startMousePosition = Input.mousePosition;
+            startP = startMousePosition;
             isSwiping = true;
         }
 
         if (isSwiping && Input.GetMouseButtonUp(0))
         {
             endMousePosition = Input.mousePosition;
+            endP = endMousePosition;
             isSwiping = false;
 
             Vector2 swipeDirection = endMousePosition - startMousePosition;
 
             if (swipeDirection.magnitude > 10f)
             {
+                swipeP = swipeDirection;
+
                 if (Mathf.Abs(swipeDirection.y) > Mathf.Abs(swipeDirection.x))
                 {
                     if (swipeDirection.y > 0)
@@ -152,6 +160,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector2.down, out hit, 5f, brickLayer))
         {
             brick = hit.collider.gameObject.GetComponent<Brick>();
+            float step = speed * Time.deltaTime;
 
             if (brickList.Count == 0)
             {
@@ -162,6 +171,7 @@ public class Player : MonoBehaviour
             {
                 brick.GetComponent<Collider>().enabled = true;
                 Vector3 stackPosition = new Vector3(transform.position.x, transform.position.y + 1f + brickList.Count * 0.36f, transform.position.z);
+                //brick.transform.position = Vector3.MoveTowards(transform.position, stackPosition, step);
                 brick.transform.position = stackPosition;
                 brick.transform.SetParent(transform);
                 brickList.Add(brick);
